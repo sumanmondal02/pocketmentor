@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 @Getter @Setter @NoArgsConstructor
 public class Note {
     public enum SourceType { PDF, TEXT }
-
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

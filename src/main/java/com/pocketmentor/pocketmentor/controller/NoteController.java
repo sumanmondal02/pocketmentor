@@ -16,6 +16,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class NoteController {
     private final NoteService service;
+    private final com.pocketmentor.pocketmentor.service.GenerationService generation;
+
+    @PostMapping("/{id}/generate")
+    public java.util.Map<String, Object> generate(@PathVariable Long id, Authentication auth) {
+        return generation.generate(auth.getName(), id);
+    }
 
     @PostMapping("/text")
     public NoteDetail text(@Valid @RequestBody NoteTextRequest r, Authentication auth) {
