@@ -28,6 +28,7 @@ public class NoteService {
     private final FlashcardRepository flashcards;
     private final SummaryRepository summaries;
     private final TopicRepository topics;
+    private final JobRegistry jobs;
 
     private User user(String email) {
         return users.findByEmail(email)
@@ -56,24 +57,39 @@ public class NoteService {
 
     public NoteDetail savePdf(String email, MultipartFile file, String title) throws IOException {
         byte[] bytes = file.getBytes();
+        String fname = file.getOriginalFilename() == null ? "" : file.getOriginalFilename();
         boolean isPdf = bytes.length > 4 && bytes[0] == '%' && bytes[1] == 'P' && bytes[2] == 'D' && bytes[3] == 'F';
-        if (!isPdf) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Only PDF files are allowed");
         String text;
-        try (PDDocument doc = Loader.loadPDF(bytes)) {
-            text = clean(new PDFTextStripper().getText(doc));
-        } catch (IOException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not read this PDF");
+        Note.SourceType type;
+        if (isPdf) {
+            try (PDDocument doc = Loader.loadPDF(bytes)) {
+                text = clean(new PDFTextStripper().getText(doc));
+            } catch (IOException e) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not read this PDF");
+            }
+            type = Note.SourceType.PDF;
+        } else if (fname.toLowerCase().endsWith(".txt")) {
+            text = clean(new String(bytes, java.nio.charset.StandardCharsets.UTF_8));
+            type = Note.SourceType.TEXT;
+        } else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Only PDF or TXT files are allowed");
         }
         if (text.isBlank())
-            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "No readable text found (scanned PDF?)");
-        String name = (title == null || title.isBlank()) ? file.getOriginalFilename() : title;
-        return save(user(email), name, text, Note.SourceType.PDF);
+            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "No readable text found");
+        String name = (title == null || title.isBlank()) ? fname : title;
+        return save(user(email), name, text, type);
     }
 
     public List<NoteSummary> list(String email) {
-        return notes.findByUserIdOrderByCreatedAtDesc(user(email).getId()).stream()
-                .map(n -> new NoteSummary(n.getId(), n.getTitle(), n.getSourceType().name(), n.getCreatedAt()))
-                .toList();
+        return notes.findByUserIdOrderByCreatedAtDesc(user(email).getId()).stream().map(n -> {
+            JobRegistry.Job j = jobs.get(n.getId());
+            String st = j != null && !"COMPLETED".equals(j.status()) ? j.status()
+                    : summaries.existsByNoteId(n.getId()) ? "READY" : "NOT_GENERATED";
+            long fc = flashcards.countByNoteId(n.getId());
+            long qc = quizzes.findFirstByNoteIdOrderByIdDesc(n.getId())
+                    .map(q -> questions.countByQuizId(q.getId())).orElse(0L);
+            return new NoteSummary(n.getId(), n.getTitle(), n.getSourceType().name(), n.getCreatedAt(), st, fc, qc);
+        }).toList();
     }
 
     public NoteDetail get(String email, Long id) { return toDetail(find(email, id)); }

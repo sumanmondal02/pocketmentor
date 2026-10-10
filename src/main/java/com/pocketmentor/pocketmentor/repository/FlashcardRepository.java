@@ -13,4 +13,5 @@ public interface FlashcardRepository extends JpaRepository<Flashcard, Long> {
     @Modifying(flushAutomatically = true, clearAutomatically = true)
     @Query("delete from Flashcard f where f.note.id = :nid")
     void deleteByNoteId(@Param("nid") Long nid);
+    long countByNoteId(Long noteId);
 }

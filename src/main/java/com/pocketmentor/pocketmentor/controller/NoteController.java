@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.http.HttpStatus;
 import java.io.IOException;
 import java.util.List;
 
@@ -19,8 +20,14 @@ public class NoteController {
     private final com.pocketmentor.pocketmentor.service.GenerationService generation;
 
     @PostMapping("/{id}/generate")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public java.util.Map<String, Object> generate(@PathVariable Long id, Authentication auth) {
-        return generation.generate(auth.getName(), id);
+        return generation.start(auth.getName(), id);
+    }
+
+    @GetMapping("/{id}/status")
+    public java.util.Map<String, Object> status(@PathVariable Long id, Authentication auth) {
+        return generation.status(auth.getName(), id);
     }
 
     @PostMapping("/text")

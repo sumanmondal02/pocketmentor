@@ -13,4 +13,5 @@ public interface SummaryRepository extends JpaRepository<Summary, Long> {
     @Modifying(flushAutomatically = true, clearAutomatically = true)
     @Query("delete from Summary s where s.note.id = :nid")
     void deleteByNoteId(@Param("nid") Long nid);
+    boolean existsByNoteId(Long noteId);
 }
