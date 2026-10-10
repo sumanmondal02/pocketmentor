@@ -34,7 +34,8 @@ public class NoteService {
     private NoteDetail save(User u, String title, String text, Note.SourceType type) {
         Note n = new Note();
         n.setUser(u);
-        n.setTitle(title == null || title.isBlank() ? "Untitled note" : title.trim());
+        String t = (title == null || title.isBlank()) ? "Untitled note" : title.trim();
+        n.setTitle(t.length() > 200 ? t.substring(0, 200) : t);
         n.setRawText(text);
         n.setSourceType(type);
         notes.save(n);

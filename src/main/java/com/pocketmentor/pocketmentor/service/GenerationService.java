@@ -22,12 +22,14 @@ public class GenerationService {
     private final QuizRepository quizzes;
     private final QuestionRepository questions;
     private final AiService ai;
+    private final RateLimiter limiter;
 
     public Map<String, Object> generate(String email, Long noteId) {
         Long uid = users.findByEmail(email)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED)).getId();
         Note note = notes.findByIdAndUserId(noteId, uid)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Note not found"));
+        limiter.check("gen:" + uid, 7, 3_600_000L);
         GeneratedContent g = ai.generate(note.getRawText()); // slow call, outside the DB transaction
         return tx.execute(status -> persist(note, g));
     }
