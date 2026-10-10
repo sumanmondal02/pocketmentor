@@ -25,3 +25,11 @@ Content-Type: application/json
 ### Blind spots
 GET http://localhost:8080/api/blindspots
 Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzdW1hbkB0ZXN0LmNvbSIsImlhdCI6MTc5MTYyOTI0MiwiZXhwIjoxNzkxNzE1NjQyfQ.fTfStg4nxbHXe5RP8Ol_cWctWaOtG0YuW0lI17BoHaFZXYUbYAYCvE2Lt-9Ldvdi
+
+### Progress
+GET http://localhost:8080/api/progress
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzdW1hbkB0ZXN0LmNvbSIsImlhdCI6MTc5MTYyOTI0MiwiZXhwIjoxNzkxNzE1NjQyfQ.fTfStg4nxbHXe5RP8Ol_cWctWaOtG0YuW0lI17BoHaFZXYUbYAYCvE2Lt-9Ldvdi
+
+### Focused retake for note 60001
+POST http://localhost:8080/api/notes/60001/retake-weak
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzdW1hbkB0ZXN0LmNvbSIsImlhdCI6MTc5MTYyOTI0MiwiZXhwIjoxNzkxNzE1NjQyfQ.fTfStg4nxbHXe5RP8Ol_cWctWaOtG0YuW0lI17BoHaFZXYUbYAYCvE2Lt-9Ldvdi
