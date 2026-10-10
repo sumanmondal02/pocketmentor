@@ -19,4 +19,4 @@ Content-Type: application/json
 
 ### Protected (paste token from login)
 GET http://localhost:8080/api/me
-Authorization: Bearer PASTE_TOKEN_HERE
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzdW1hbkB0ZXN0LmNvbSIsImlhdCI6MTc5MTYyNzYyNCwiZXhwIjoxNzkxNzE0MDI0fQ.1YUBH4p1aNVAh_n3zxIpGk2ioAgFzdcQc9anjpTwUzsMawbjBDVW2tpjNKUgohEg
