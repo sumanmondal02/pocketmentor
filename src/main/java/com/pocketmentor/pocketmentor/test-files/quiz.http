@@ -1,0 +1,27 @@
+### Quiz questions (use quizId from generate, e.g. 60003)
+GET http://localhost:8080/api/quizzes/60003
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzdW1hbkB0ZXN0LmNvbSIsImlhdCI6MTc5MTYyOTI0MiwiZXhwIjoxNzkxNzE1NjQyfQ.fTfStg4nxbHXe5RP8Ol_cWctWaOtG0YuW0lI17BoHaFZXYUbYAYCvE2Lt-9Ldvdi
+
+### Flashcards
+GET http://localhost:8080/api/notes/60001/flashcards
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzdW1hbkB0ZXN0LmNvbSIsImlhdCI6MTc5MTYyOTI0MiwiZXhwIjoxNzkxNzE1NjQyfQ.fTfStg4nxbHXe5RP8Ol_cWctWaOtG0YuW0lI17BoHaFZXYUbYAYCvE2Lt-9Ldvdi
+
+### Submit (replace questionIds with the real ones from the GET above)
+POST http://localhost:8080/api/quizzes/60003/submit
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzdW1hbkB0ZXN0LmNvbSIsImlhdCI6MTc5MTYyOTI0MiwiZXhwIjoxNzkxNzE1NjQyfQ.fTfStg4nxbHXe5RP8Ol_cWctWaOtG0YuW0lI17BoHaFZXYUbYAYCvE2Lt-9Ldvdi
+Content-Type: application/json
+
+{"answers":[
+ {"questionId":60018,"selected":"A","confidence":"SURE"},
+ {"questionId":60019,"selected":"B","confidence":"SURE"},
+ {"questionId":60020,"selected":"C","confidence":"GUESSING"},
+ {"questionId":60021,"selected":"B","confidence":"NOT_SURE"},
+ {"questionId":60022,"selected":"D","confidence":"SURE"},
+ {"questionId":60023,"selected":"B","confidence":"SURE"},
+ {"questionId":60024,"selected":"A","confidence":"SURE"},
+ {"questionId":60025,"selected":"B","confidence":"NOT_SURE"}
+]}
+
+### Blind spots
+GET http://localhost:8080/api/blindspots
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzdW1hbkB0ZXN0LmNvbSIsImlhdCI6MTc5MTYyOTI0MiwiZXhwIjoxNzkxNzE1NjQyfQ.fTfStg4nxbHXe5RP8Ol_cWctWaOtG0YuW0lI17BoHaFZXYUbYAYCvE2Lt-9Ldvdi
