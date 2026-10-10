@@ -34,3 +34,7 @@ build/
 
 # env
 src/main/resources/application-local.properties
+
+# macOS
+.DS_Store
+**/.DS_Store

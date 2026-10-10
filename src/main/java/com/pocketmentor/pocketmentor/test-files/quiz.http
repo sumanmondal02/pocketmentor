@@ -1,14 +1,14 @@
 ### Quiz questions (use quizId from generate, e.g. 60003)
 GET http://localhost:8080/api/quizzes/60003
-Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzdW1hbkB0ZXN0LmNvbSIsImlhdCI6MTc5MTYyOTI0MiwiZXhwIjoxNzkxNzE1NjQyfQ.fTfStg4nxbHXe5RP8Ol_cWctWaOtG0YuW0lI17BoHaFZXYUbYAYCvE2Lt-9Ldvdi
+Authorization: Bearer PasteTokenHere
 
 ### Flashcards
 GET http://localhost:8080/api/notes/60001/flashcards
-Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzdW1hbkB0ZXN0LmNvbSIsImlhdCI6MTc5MTYyOTI0MiwiZXhwIjoxNzkxNzE1NjQyfQ.fTfStg4nxbHXe5RP8Ol_cWctWaOtG0YuW0lI17BoHaFZXYUbYAYCvE2Lt-9Ldvdi
+Authorization: Bearer PasteTokenHere
 
 ### Submit (replace questionIds with the real ones from the GET above)
 POST http://localhost:8080/api/quizzes/60003/submit
-Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzdW1hbkB0ZXN0LmNvbSIsImlhdCI6MTc5MTYyOTI0MiwiZXhwIjoxNzkxNzE1NjQyfQ.fTfStg4nxbHXe5RP8Ol_cWctWaOtG0YuW0lI17BoHaFZXYUbYAYCvE2Lt-9Ldvdi
+Authorization: Bearer PasteTokenHere
 Content-Type: application/json
 
 {"answers":[
@@ -24,16 +24,16 @@ Content-Type: application/json
 
 ### Blind spots
 GET http://localhost:8080/api/blindspots
-Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzdW1hbkB0ZXN0LmNvbSIsImlhdCI6MTc5MTYyOTI0MiwiZXhwIjoxNzkxNzE1NjQyfQ.fTfStg4nxbHXe5RP8Ol_cWctWaOtG0YuW0lI17BoHaFZXYUbYAYCvE2Lt-9Ldvdi
+Authorization: Bearer PasteTokenHere
 
 ### Progress
 GET http://localhost:8080/api/progress
-Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzdW1hbkB0ZXN0LmNvbSIsImlhdCI6MTc5MTYyOTI0MiwiZXhwIjoxNzkxNzE1NjQyfQ.fTfStg4nxbHXe5RP8Ol_cWctWaOtG0YuW0lI17BoHaFZXYUbYAYCvE2Lt-9Ldvdi
+Authorization: Bearer PasteTokenHere
 
 ### Focused retake for note 60001
 POST http://localhost:8080/api/notes/60001/retake-weak
-Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzdW1hbkB0ZXN0LmNvbSIsImlhdCI6MTc5MTYyOTI0MiwiZXhwIjoxNzkxNzE1NjQyfQ.fTfStg4nxbHXe5RP8Ol_cWctWaOtG0YuW0lI17BoHaFZXYUbYAYCvE2Lt-9Ldvdi
+Authorization: Bearer PasteTokenHere
 
 ### get api notes/99999
 GET  http://localhost:8080/api/notes/99999
-Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzdW1hbkB0ZXN0LmNvbSIsImlhdCI6MTc5MTYyOTI0MiwiZXhwIjoxNzkxNzE1NjQyfQ.fTfStg4nxbHXe5RP8Ol_cWctWaOtG0YuW0lI17BoHaFZXYUbYAYCvE2Lt-9Ldvdi
+Authorization: Bearer PasteTokenHere

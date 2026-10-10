@@ -13,4 +13,8 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
     @Modifying(flushAutomatically = true, clearAutomatically = true)
     @Query("update Question q set q.topic = null where q.quiz.id in (select z.id from Quiz z where z.note.id = :nid)")
     void detachTopics(@Param("nid") Long nid);
+
+    @Modifying(flushAutomatically = true, clearAutomatically = true)
+    @Query("delete from Question q where q.quiz.id in (select z.id from Quiz z where z.note.id = :nid)")
+    void deleteByNote(@Param("nid") Long nid);
 }

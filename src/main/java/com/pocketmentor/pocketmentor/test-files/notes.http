@@ -1,6 +1,6 @@
 ### Paste text
 POST http://localhost:8080/api/notes/text
-Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzdW1hbkB0ZXN0LmNvbSIsImlhdCI6MTc5MTUzOTc5MSwiZXhwIjoxNzkxNjI2MTkxfQ.-oF1lo5L3yBZQLNinhRp2E3LMxaiJ5mUrzyTIxT9Lwp3wPd0w1d7_s-YWmLeLrtS
+Authorization: Bearer PasteTokenHere
 Content-Type: application/json
 
 {
@@ -10,7 +10,7 @@ Content-Type: application/json
 
 ### Upload PDF
 POST http://localhost:8080/api/notes/upload
-Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzdW1hbkB0ZXN0LmNvbSIsImlhdCI6MTc5MTYyOTI0MiwiZXhwIjoxNzkxNzE1NjQyfQ.fTfStg4nxbHXe5RP8Ol_cWctWaOtG0YuW0lI17BoHaFZXYUbYAYCvE2Lt-9Ldvdi
+Authorization: Bearer PasteTokenHere
 Content-Type: multipart/form-data; boundary=X
 
 --X
@@ -22,8 +22,8 @@ Content-Type: application/pdf
 
 ### List
 GET http://localhost:8080/api/notes
-Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzdW1hbkB0ZXN0LmNvbSIsImlhdCI6MTc5MTYyOTI0MiwiZXhwIjoxNzkxNzE1NjQyfQ.fTfStg4nxbHXe5RP8Ol_cWctWaOtG0YuW0lI17BoHaFZXYUbYAYCvE2Lt-9Ldvdi
+Authorization: Bearer PasteTokenHere
 
 ### Generate
 POST http://localhost:8080/api/notes/60001/generate
-Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzdW1hbkB0ZXN0LmNvbSIsImlhdCI6MTc5MTYyOTI0MiwiZXhwIjoxNzkxNzE1NjQyfQ.fTfStg4nxbHXe5RP8Ol_cWctWaOtG0YuW0lI17BoHaFZXYUbYAYCvE2Lt-9Ldvdi
+Authorization: Bearer PasteTokenHere

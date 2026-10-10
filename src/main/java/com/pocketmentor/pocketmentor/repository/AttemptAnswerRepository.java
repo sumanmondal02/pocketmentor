@@ -5,6 +5,7 @@ import com.pocketmentor.pocketmentor.model.Question;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.data.jpa.repository.Modifying;
 import java.util.List;
 
 public interface AttemptAnswerRepository extends JpaRepository<AttemptAnswer, Long> {
@@ -22,4 +23,8 @@ public interface AttemptAnswerRepository extends JpaRepository<AttemptAnswer, Lo
         select distinct q from AttemptAnswer a join a.question q
         where a.attempt.user.id = :uid and q.quiz.note.id = :nid and a.correct = false""")
     List<Question> weakQuestions(@Param("uid") Long uid, @Param("nid") Long nid);
+
+    @Modifying(flushAutomatically = true, clearAutomatically = true)
+    @Query("delete from AttemptAnswer a where a.attempt.id in (select t.id from QuizAttempt t where t.quiz.id in (select z.id from Quiz z where z.note.id = :nid))")
+    void deleteByNote(@Param("nid") Long nid);
 }

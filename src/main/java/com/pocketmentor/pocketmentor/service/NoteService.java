@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.transaction.annotation.Transactional;
 import java.io.IOException;
 import java.util.List;
 
@@ -20,6 +21,13 @@ public class NoteService {
     private static final int MAX_CHARS = 100_000;
     private final NoteRepository notes;
     private final UserRepository users;
+    private final AttemptAnswerRepository answers;
+    private final QuizAttemptRepository attempts;
+    private final QuestionRepository questions;
+    private final QuizRepository quizzes;
+    private final FlashcardRepository flashcards;
+    private final SummaryRepository summaries;
+    private final TopicRepository topics;
 
     private User user(String email) {
         return users.findByEmail(email)
@@ -70,7 +78,19 @@ public class NoteService {
 
     public NoteDetail get(String email, Long id) { return toDetail(find(email, id)); }
 
-    public void delete(String email, Long id) { notes.delete(find(email, id)); }
+    @Transactional
+    public void delete(String email, Long id) {
+        Note n = find(email, id);
+        Long nid = n.getId();
+        answers.deleteByNote(nid);
+        attempts.deleteByNote(nid);
+        questions.deleteByNote(nid);
+        quizzes.deleteByNote(nid);
+        flashcards.deleteByNoteId(nid);
+        summaries.deleteByNoteId(nid);
+        topics.deleteByNoteId(nid);
+        notes.deleteById(nid);
+    }
 
     private Note find(String email, Long id) {
         return notes.findByIdAndUserId(id, user(email).getId())
