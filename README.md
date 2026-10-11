@@ -2,7 +2,6 @@
 
 REST API for **Pocket Mentor**, an AI-powered study companion that turns class notes into summaries, flashcards and quizzes, and detects *blind spots* (answers a student was sure about but got wrong).
 
-- **Live API:** `https://pocketmentor-d724.onrender.com`
 - **Frontend repo:** `https://github.com/sumanmondal02/pocketmentor-frontend`
 - **Developer:** Suman Mondal
 
